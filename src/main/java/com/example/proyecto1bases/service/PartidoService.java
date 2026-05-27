@@ -108,7 +108,6 @@ public class PartidoService {
         call.execute(new MapSqlParameterSource().addValue("id_partido", idPartido));
     }
 
-    // ── RowMapper interno ─────────────────────────────────────────
 
     static class PartidoRowMapper implements RowMapper<Partido> {
         @Override

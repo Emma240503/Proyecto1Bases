@@ -26,7 +26,6 @@ public class QuinielaService {
     @Autowired
     private DataSource dataSource;
 
-    // ── Quiniela CRUD ─────────────────────────────────────────────
 
     /** Crea una nueva quiniela (SP InsertarQuiniela). */
     public void insertarQuiniela(Quiniela q) {

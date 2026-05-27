@@ -32,9 +32,6 @@ public class PronosticoController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // ═══════════════════════════════════════════════════════════════
-    // JUGADOR — Pronósticos
-    // ═══════════════════════════════════════════════════════════════
 
     /** Muestra el formulario de pronóstico para un partido de una quiniela. */
     @GetMapping("/jugador/pronosticos/{quinielaId}/{partidoId}")
