@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container py-5">
+
+    <!-- Bienvenida -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">
+                <i class="bi bi-house-door-fill text-primary me-2"></i>
+                Bienvenido/a, <span th:text="${username}" class="text-primary">Usuario</span>
+            </h2>
+            <p class="text-muted">Selecciona una opción del menú para comenzar.</p>
+        </div>
+    </div>
+
+    <!-- ── PANEL ADMINISTRADOR ─────────────────────────────────── -->
+    <div th:if="${isAdmin}" class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-list-stars display-4 text-primary"></i>
+                    <h5 class="card-title mt-3">Gestionar Quinielas</h5>
+                    <p class="card-text text-muted">
+                        Crea, edita y cambia el estado de las quinielas.
+                    </p>
+                    <a th:href="@{/admin/quinielas}" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle me-1"></i>Ir a Quinielas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-calendar3-event display-4 text-success"></i>
+                    <h5 class="card-title mt-3">Gestionar Partidos</h5>
+                    <p class="card-text text-muted">
+                        Agrega partidos y actualiza los resultados.
+                    </p>
+                    <a th:href="@{/admin/partidos}" class="btn btn-success">
+                        <i class="bi bi-arrow-right-circle me-1"></i>Ir a Partidos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-trophy display-4 text-warning"></i>
+                    <h5 class="card-title mt-3">Ver Rankings</h5>
+                    <p class="card-text text-muted">
+                        Consulta el ranking de puntuaciones por quiniela.
+                    </p>
+                    <a th:href="@{/admin/quinielas}" class="btn btn-warning text-dark">
+                        <i class="bi bi-bar-chart me-1"></i>Ver Rankings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── PANEL JUGADOR ──────────────────────────────────────── -->
+    <div th:unless="${isAdmin}" class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-search display-4 text-primary"></i>
+                    <h5 class="card-title mt-3">Explorar Quinielas</h5>
+                    <p class="card-text text-muted">
+                        Busca quinielas abiertas e inscríbete.
+                    </p>
+                    <a th:href="@{/jugador/quinielas}" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle me-1"></i>Ver Quinielas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-pencil-square display-4 text-info"></i>
+                    <h5 class="card-title mt-3">Mis Pronósticos</h5>
+                    <p class="card-text text-muted">
+                        Ingresa tus predicciones antes de que inicien los partidos.
+                    </p>
+                    <a th:href="@{/jugador/quinielas}" class="btn btn-info text-white">
+                        <i class="bi bi-arrow-right-circle me-1"></i>Ir a Pronósticos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-trophy display-4 text-warning"></i>
+                    <h5 class="card-title mt-3">Ranking</h5>
+                    <p class="card-text text-muted">
+                        Consulta tu posición en el ranking de cada quiniela.
+                    </p>
+                    <a th:href="@{/jugador/quinielas}" class="btn btn-warning text-dark">
+                        <i class="bi bi-bar-chart me-1"></i>Ver Ranking
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

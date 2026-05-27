@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Detalle Quiniela')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container py-4">
+
+    <!-- Cabecera quiniela -->
+    <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+            <a sec:authorize="hasRole('ADMINISTRADOR')"
+               th:href="@{/admin/quinielas}" class="btn btn-sm btn-outline-secondary me-2">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+            <a sec:authorize="hasRole('JUGADOR')"
+               th:href="@{/jugador/quinielas}" class="btn btn-sm btn-outline-secondary me-2">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+        <div class="d-flex gap-2">
+            <!-- ADMIN: añadir partido -->
+            <a sec:authorize="hasRole('ADMINISTRADOR')"
+               th:href="@{/admin/partidos/nuevo(quinielaId=${quiniela.idQuiniela})}"
+               class="btn btn-success">
+                <i class="bi bi-plus-circle me-1"></i>Añadir Partido
+            </a>
+            <!-- Ranking -->
+            <a th:href="@{/ranking/{id}(id=${quiniela.idQuiniela})}"
+               class="btn btn-warning text-dark">
+                <i class="bi bi-trophy me-1"></i>Ranking
+            </a>
+        </div>
+    </div>
+
+    <!-- Info quiniela -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="fw-bold" th:text="${quiniela.nombre}"></h4>
+                    <p class="text-muted mb-1" th:text="${quiniela.descripcion}"></p>
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle me-1"></i>
+                        <strong>Reglas:</strong>
+                        <span th:text="${quiniela.reglas}"></span>
+                    </small>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <span class="badge rounded-pill fs-6 mb-2"
+                          th:classappend="'badge-' + ${quiniela.estado}"
+                          th:text="${quiniela.estado}"></span>
+                    <br/>
+                    <small class="text-muted">
+                        Modalidad: <strong th:text="${quiniela.modalidad}"></strong>
+                    </small>
+                    <br/>
+                    <small class="text-muted">
+                        Puntuación: <strong th:text="${quiniela.tipoPuntuacion}"></strong>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensajes flash -->
+    <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle me-1"></i><span th:text="${mensaje}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle me-1"></i><span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Tabla de partidos -->
+    <h5 class="fw-bold mb-3">
+        <i class="bi bi-calendar3 text-success me-1"></i>
+        Partidos (<span th:text="${#lists.size(partidos)}">0</span>)
+    </h5>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Local</th>
+                            <th class="text-center">Resultado</th>
+                            <th>Visitante</th>
+                            <th>Fecha / Hora</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${partidos}">
+                            <td class="fw-semibold" th:text="${p.equipoLocal}"></td>
+                            <td class="text-center fw-bold fs-5">
+                                <span th:if="${p.golesLocal != null}"
+                                      th:text="${p.golesLocal + ' - ' + p.golesVisitante}">
+                                </span>
+                                <span th:if="${p.golesLocal == null}" class="text-muted">vs</span>
+                            </td>
+                            <td class="fw-semibold" th:text="${p.equipoVisitante}"></td>
+                            <td>
+                                <span th:if="${p.fechaHora != null}"
+                                      th:text="${#temporals.format(p.fechaHora, 'dd/MM/yyyy HH:mm')}">
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge rounded-pill"
+                                      th:classappend="'badge-' + ${p.estado}"
+                                      th:text="${p.estado}"></span>
+                            </td>
+                            <td class="text-center">
+
+                                <!-- ADMIN: actualizar resultado y eliminar -->
+                                <a sec:authorize="hasRole('ADMINISTRADOR')"
+                                   th:href="@{/admin/partidos/{id}/resultado(id=${p.idPartido},quinielaId=${quiniela.idQuiniela})}"
+                                   class="btn btn-sm btn-outline-success me-1"
+                                   title="Actualizar resultado">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <form sec:authorize="hasRole('ADMINISTRADOR')"
+                                      th:action="@{/admin/partidos/{id}/eliminar(id=${p.idPartido})}"
+                                      method="post" class="d-inline"
+                                      onsubmit="return confirm('¿Eliminar este partido?')">
+                                    <input type="hidden" name="quinielaId" th:value="${quiniela.idQuiniela}"/>
+                                    <button class="btn btn-sm btn-outline-danger" type="submit" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+
+                                <!-- JUGADOR: pronóstico (solo PENDIENTE) -->
+                                <a sec:authorize="hasRole('JUGADOR')"
+                                   th:if="${p.estado == 'PENDIENTE'}"
+                                   th:href="@{/jugador/pronosticos/{qid}/{pid}(qid=${quiniela.idQuiniela},pid=${p.idPartido})}"
+                                   class="btn btn-sm btn-primary"
+                                   title="Ingresar pronóstico">
+                                    <i class="bi bi-pencil me-1"></i>Pronóstico
+                                </a>
+                                <span sec:authorize="hasRole('JUGADOR')"
+                                      th:unless="${p.estado == 'PENDIENTE'}"
+                                      class="text-muted small">—</span>
+
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(partidos)}">
+                            <td colspan="6" class="text-center text-muted py-4">
+                                No hay partidos en esta quiniela.
+                                <span sec:authorize="hasRole('ADMINISTRADOR')">
+                                    <a th:href="@{/admin/partidos/nuevo(quinielaId=${quiniela.idQuiniela})}">
+                                        Añade el primero.
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

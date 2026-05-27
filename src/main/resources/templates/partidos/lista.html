@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Partidos')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold">
+            <i class="bi bi-calendar3 text-success me-2"></i>Partidos
+        </h3>
+        <a th:href="@{/admin/partidos/nuevo}" class="btn btn-success">
+            <i class="bi bi-plus-circle me-1"></i>Nuevo Partido
+        </a>
+    </div>
+
+    <!-- Mensajes flash -->
+    <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle me-1"></i><span th:text="${mensaje}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle me-1"></i><span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Acceso por quiniela -->
+    <div class="alert alert-info d-flex align-items-center">
+        <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+        <div>
+            Los partidos se administran desde el detalle de cada quiniela.
+            Selecciona una quiniela para ver sus partidos:
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div th:each="q : ${quinielas}" class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h6 class="card-title fw-bold mb-1" th:text="${q.nombre}"></h6>
+                        <span class="badge rounded-pill"
+                              th:classappend="'badge-' + ${q.estado}"
+                              th:text="${q.estado}"></span>
+                    </div>
+                    <p class="card-text text-muted small" th:text="${q.descripcion}"></p>
+                </div>
+                <div class="card-footer bg-transparent d-flex gap-2">
+                    <a th:href="@{/admin/quinielas/{id}(id=${q.idQuiniela})}"
+                       class="btn btn-sm btn-outline-primary flex-fill">
+                        <i class="bi bi-eye me-1"></i>Ver Partidos
+                    </a>
+                    <a th:href="@{/admin/partidos/nuevo(quinielaId=${q.idQuiniela})}"
+                       class="btn btn-sm btn-success flex-fill">
+                        <i class="bi bi-plus"></i> Añadir
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(quinielas)}" class="col-12">
+            <p class="text-center text-muted py-4">No hay quinielas creadas todavía.</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
