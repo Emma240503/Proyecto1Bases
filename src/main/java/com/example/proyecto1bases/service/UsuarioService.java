@@ -37,7 +37,6 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private DataSource dataSource;
 
-    /** @Lazy evita la dependencia circular con SecurityConfig */
     @Autowired
     @Lazy
     private PasswordEncoder passwordEncoder;
