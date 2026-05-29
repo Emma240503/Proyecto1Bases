@@ -78,7 +78,7 @@ public class PronosticoService {
                 .withProcedureName("ObtenerRanking")
                 .returningResultSet("ranking", (rs, rn) -> {
                     Map<String, Object> row = new HashMap<>();
-                    row.put("id_usuario",     rs.getLong("id_usuario"));
+                    row.put("posicion",       rs.getInt("posicion"));
                     row.put("nombre_completo",rs.getString("nombre_completo"));
                     row.put("username",       rs.getString("username"));
                     row.put("puntos_totales", rs.getInt("puntos_totales"));
