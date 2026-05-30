@@ -27,9 +27,7 @@ public class QuinielaController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // ═══════════════════════════════════════════════════════════════
-    // ADMIN — CRUD de Quinielas
-    // ═══════════════════════════════════════════════════════════════
+
 
     @GetMapping("/admin/quinielas")
     public String listaAdmin(Model model) {

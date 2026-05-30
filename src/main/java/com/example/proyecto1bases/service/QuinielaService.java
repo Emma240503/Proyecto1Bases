@@ -130,10 +130,7 @@ public class QuinielaService {
         call.execute(params);
     }
 
-    /**
-     * Retorna inscripciones de una quiniela (SP ObtenerInscripcionesPorQuiniela).
-     * Devuelve mapas genéricos porque el SP puede retornar joins con datos de usuario.
-     */
+
     public List<Map<String, Object>> obtenerInscripcionesPorQuiniela(Long idQuiniela) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ObtenerInscripcionesPorQuiniela")

@@ -12,22 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Configuración de Spring Security 6.
- *
- * Roles:
- *   - ROLE_ADMINISTRADOR → /admin/**
- *   - ROLE_JUGADOR       → /jugador/**
- *   - Público            → /login, /registro, recursos estáticos
- *
- * @Lazy en UsuarioService rompe la dependencia circular:
- *   SecurityConfig → UsuarioService → PasswordEncoder → SecurityConfig
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /** @Lazy para evitar dependencia circular con UsuarioService */
     @Autowired
     @Lazy
     private UsuarioService usuarioService;
@@ -50,14 +38,14 @@ public class SecurityConfig {
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                // recursos públicos
+
                 .requestMatchers("/login", "/registro",
                                  "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-                // solo ADMINISTRADOR
+
                 .requestMatchers("/admin/**").hasRole("ADMINISTRADOR")
-                // solo JUGADOR
+
                 .requestMatchers("/jugador/**").hasRole("JUGADOR")
-                // el resto requiere autenticación
+
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
