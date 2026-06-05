@@ -18,20 +18,17 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
-    /** Muestra la página de login. Spring Security maneja el POST /login automáticamente. */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    /** Muestra el formulario de registro público. */
     @GetMapping("/registro")
     public String registroForm(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "registro";
     }
 
-    /** Procesa el formulario de registro y redirige al login. */
     @PostMapping("/registro")
     public String registrar(@ModelAttribute Usuario usuario, RedirectAttributes redirect) {
         try {
@@ -44,10 +41,7 @@ public class AuthController {
         }
     }
 
-    /**
-     * Dashboard principal — muestra opciones según el rol del usuario autenticado.
-     * Accesible para cualquier usuario autenticado (admin y jugador).
-     */
+
     @GetMapping("/dashboard")
     public String dashboard(Authentication auth, Model model) {
         boolean isAdmin = auth.getAuthorities()

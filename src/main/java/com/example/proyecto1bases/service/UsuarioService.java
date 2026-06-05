@@ -22,15 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Servicio de usuario.
- * Implementa UserDetailsService para Spring Security.
- * Todas las operaciones de BD se realizan mediante SimpleJdbcCall
- * invocando los procedimientos almacenados de SQL Server.
- *
- * NOTA sobre @Lazy en PasswordEncoder: se usa para romper la
- * dependencia circular SecurityConfig → UsuarioService → PasswordEncoder → SecurityConfig.
- */
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -41,7 +33,6 @@ public class UsuarioService implements UserDetailsService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    // ── Spring Security ───────────────────────────────────────────
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -69,13 +60,7 @@ public class UsuarioService implements UserDetailsService {
                 .build();
     }
 
-    // ── CRUD mediante procedimientos almacenados ──────────────────
 
-    /**
-     * Registra un nuevo usuario.
-     * La contraseña se hashea con BCrypt antes de llamar al SP.
-     * El tipo_usuario siempre será JUGADOR en el autoregistro.
-     */
     public void registrarUsuario(Usuario usuario) {
         String hash = passwordEncoder.encode(usuario.getContrasena());
 
@@ -106,7 +91,6 @@ public class UsuarioService implements UserDetailsService {
         return lista;
     }
 
-    /** Devuelve un usuario por su username (SP ObtenerUsuarioPorUsername). */
     public Usuario obtenerPorUsername(String username) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ObtenerUsuarioPorUsername")
@@ -122,7 +106,6 @@ public class UsuarioService implements UserDetailsService {
         return (lista != null && !lista.isEmpty()) ? lista.get(0) : null;
     }
 
-    /** Actualiza datos del usuario (SP ActualizarUsuario). */
     public void actualizarUsuario(Usuario usuario) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ActualizarUsuario");
@@ -137,7 +120,6 @@ public class UsuarioService implements UserDetailsService {
         call.execute(params);
     }
 
-    /** Elimina un usuario por id (SP EliminarUsuario). */
     public void eliminarUsuario(Long idUsuario) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("EliminarUsuario");
@@ -145,7 +127,6 @@ public class UsuarioService implements UserDetailsService {
         call.execute(new MapSqlParameterSource().addValue("id_usuario", idUsuario));
     }
 
-    // ── RowMapper interno ─────────────────────────────────────────
 
     static class UsuarioRowMapper implements RowMapper<Usuario> {
         @Override

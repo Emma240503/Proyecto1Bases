@@ -15,26 +15,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Servicio de Partidos.
- * Todas las operaciones usan SimpleJdbcCall sobre los procedimientos almacenados.
- *
- * NOTA: Se asume que el SP InsertarPartido acepta el parámetro @id_quiniela
- * para insertar simultáneamente en QUINIELA_PARTIDO.
- * Si tu SP no lo acepta, elimina ese parámetro del método insertarPartido.
- */
+
 @Service
 public class PartidoService {
 
     @Autowired
     private DataSource dataSource;
 
-    /**
-     * Crea un partido y lo asocia a una quiniela (SP InsertarPartido).
-     *
-     * @param partido   datos del partido
-     * @param idQuiniela quiniela a la que pertenece (se pasa al SP)
-     */
+
     public void insertarPartido(Partido partido, Long idQuiniela) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("InsertarPartido");
@@ -52,7 +40,6 @@ public class PartidoService {
         call.execute(params);
     }
 
-    /** Retorna los partidos de una quiniela (SP ObtenerPartidosPorQuiniela). */
     public List<Partido> obtenerPorQuiniela(Long idQuiniela) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ObtenerPartidosPorQuiniela")
@@ -84,10 +71,7 @@ public class PartidoService {
         return (lista != null && !lista.isEmpty()) ? lista.get(0) : null;
     }
 
-    /**
-     * Actualiza el resultado de un partido (SP ActualizarResultadoPartido).
-     * Este SP también llama internamente a CalcularPuntuacion.
-     */
+
     public void actualizarResultado(Long idPartido, Integer golesLocal, Integer golesVisitante) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ActualizarResultadoPartido");
@@ -100,7 +84,6 @@ public class PartidoService {
         call.execute(params);
     }
 
-    /** Elimina un partido (SP EliminarPartido). */
     public void eliminarPartido(Long idPartido) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("EliminarPartido");

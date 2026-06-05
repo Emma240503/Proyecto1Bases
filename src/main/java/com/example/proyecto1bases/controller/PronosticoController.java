@@ -33,7 +33,6 @@ public class PronosticoController {
     private UsuarioService usuarioService;
 
 
-    /** Muestra el formulario de pronóstico para un partido de una quiniela. */
     @GetMapping("/jugador/pronosticos/{quinielaId}/{partidoId}")
     public String formulario(@PathVariable Long quinielaId,
                               @PathVariable Long partidoId,
@@ -74,9 +73,7 @@ public class PronosticoController {
         return "redirect:/jugador/quinielas/" + quinielaId;
     }
 
-    // ═══════════════════════════════════════════════════════════════
-    // RANKING — Accesible para todos los usuarios autenticados
-    // ═══════════════════════════════════════════════════════════════
+    // RANKING
 
     @GetMapping("/ranking/{quinielaId}")
     public String ranking(@PathVariable Long quinielaId, Model model) {

@@ -27,7 +27,6 @@ public class QuinielaService {
     private DataSource dataSource;
 
 
-    /** Crea una nueva quiniela (SP InsertarQuiniela). */
     public void insertarQuiniela(Quiniela q) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("InsertarQuiniela");
@@ -45,7 +44,6 @@ public class QuinielaService {
         call.execute(params);
     }
 
-    /** Retorna todas las quinielas (SP ObtenerQuinielas). */
     public List<Quiniela> obtenerTodas() {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ObtenerQuinielas")
@@ -58,7 +56,6 @@ public class QuinielaService {
         return lista;
     }
 
-    /** Retorna una quiniela por id (SP ObtenerQuinielaPorId). */
     public Quiniela obtenerPorId(Long idQuiniela) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ObtenerQuinielaPorId")
@@ -74,7 +71,6 @@ public class QuinielaService {
         return (lista != null && !lista.isEmpty()) ? lista.get(0) : null;
     }
 
-    /** Actualiza una quiniela (SP ActualizarQuiniela). */
     public void actualizarQuiniela(Quiniela q) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("ActualizarQuiniela");
@@ -92,7 +88,6 @@ public class QuinielaService {
         call.execute(params);
     }
 
-    /** Cambia el estado de una quiniela (SP CambiarEstadoQuiniela). */
     public void cambiarEstado(Long idQuiniela, String estado) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("CambiarEstadoQuiniela");
@@ -104,7 +99,6 @@ public class QuinielaService {
         call.execute(params);
     }
 
-    /** Elimina una quiniela (SP EliminarQuiniela). */
     public void eliminarQuiniela(Long idQuiniela) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("EliminarQuiniela");
@@ -114,10 +108,7 @@ public class QuinielaService {
 
     // ── Inscripciones ─────────────────────────────────────────────
 
-    /**
-     * Inscribe a un usuario en una quiniela (SP InscribirUsuario).
-     * El SP registra la fecha de inscripción internamente.
-     */
+
     public void inscribirUsuario(Long idUsuario, Long idQuiniela, boolean aceptoReglas) {
         SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
                 .withProcedureName("InscribirUsuario");
@@ -155,7 +146,6 @@ public class QuinielaService {
         return lista;
     }
 
-    // ── RowMapper interno ─────────────────────────────────────────
 
     static class QuinielaRowMapper implements RowMapper<Quiniela> {
         @Override

@@ -109,9 +109,8 @@ public class QuinielaController {
         return "quinielas/detalle";
     }
 
-    // ═══════════════════════════════════════════════════════════════
     // JUGADOR — Ver quinielas e inscribirse
-    // ═══════════════════════════════════════════════════════════════
+
 
     @GetMapping("/jugador/quinielas")
     public String listaJugador(Model model) {
@@ -134,7 +133,6 @@ public class QuinielaController {
         return "redirect:/jugador/quinielas";
     }
 
-    /** Detalle de quiniela para JUGADOR: muestra partidos con botones de pronóstico. */
     @GetMapping("/jugador/quinielas/{id}")
     public String detalleJugador(@PathVariable Long id, Model model, Authentication auth) {
         Quiniela quiniela = quinielaService.obtenerPorId(id);

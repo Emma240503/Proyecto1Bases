@@ -9,7 +9,6 @@
 
 <div class="container py-5">
 
-    <!-- Bienvenida -->
     <div class="row mb-4">
         <div class="col">
             <h2 class="fw-bold">
@@ -20,7 +19,6 @@
         </div>
     </div>
 
-    <!-- ── PANEL ADMINISTRADOR ─────────────────────────────────── -->
     <div th:if="${isAdmin}" class="row g-4">
 
         <div class="col-md-6 col-lg-4">
@@ -70,7 +68,6 @@
 
     </div>
 
-    <!-- ── PANEL JUGADOR ──────────────────────────────────────── -->
     <div th:unless="${isAdmin}" class="row g-4">
 
         <div class="col-md-6 col-lg-4">

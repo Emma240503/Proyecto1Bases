@@ -20,18 +20,13 @@ public class PartidoController {
     @Autowired
     private QuinielaService quinielaService;
 
-    /**
-     * Lista de quinielas para seleccionar dónde administrar partidos.
-     * No existe SP "ObtenerTodosLosPartidos", así que se navega
-     * por quiniela → detalle con sus partidos.
-     */
+
     @GetMapping
     public String lista(Model model) {
         model.addAttribute("quinielas", quinielaService.obtenerTodas());
         return "partidos/lista";
     }
 
-    /** Formulario para crear un partido, recibe quinielaId como parámetro. */
     @GetMapping("/nuevo")
     public String nuevoForm(@RequestParam(required = false) Long quinielaId, Model model) {
         model.addAttribute("partido", new Partido());
@@ -40,7 +35,6 @@ public class PartidoController {
         return "partidos/form";
     }
 
-    /** Crea el partido y lo asocia a la quiniela seleccionada. */
     @PostMapping
     public String crear(@ModelAttribute Partido partido,
                          @RequestParam(required = false) Long quinielaId,
@@ -57,7 +51,6 @@ public class PartidoController {
         return "redirect:/admin/partidos";
     }
 
-    /** Formulario para actualizar el resultado de un partido. */
     @GetMapping("/{id}/resultado")
     public String resultadoForm(@PathVariable Long id,
                                  @RequestParam(required = false) Long quinielaId,
@@ -69,10 +62,7 @@ public class PartidoController {
         return "partidos/form";
     }
 
-    /**
-     * Actualiza el resultado del partido.
-     * El SP ActualizarResultadoPartido llama internamente a CalcularPuntuacion.
-     */
+
     @PostMapping("/{id}/resultado")
     public String actualizarResultado(@PathVariable Long id,
                                        @RequestParam Integer golesLocal,
@@ -91,7 +81,7 @@ public class PartidoController {
         return "redirect:/admin/partidos";
     }
 
-    /** Elimina un partido. */
+
     @PostMapping("/{id}/eliminar")
     public String eliminar(@PathVariable Long id,
                             @RequestParam(required = false) Long quinielaId,
