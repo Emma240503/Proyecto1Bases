@@ -1,0 +1,378 @@
+
+:root {
+    --qf-bg:          #111318;
+    --qf-surface:     #1a1d23;
+    --qf-surface-2:   #22252e;
+    --qf-deep:        #0f1117;
+    --qf-border:      #2a2d35;
+    --qf-amber:       #e8a020;
+    --qf-amber-dark:  #c4861a;
+    --qf-text:        #e2e8f0;
+    --qf-muted:       #94a3b8;
+    --qf-navbar-bg:   #13151a;
+
+    /* Bootstrap variable overrides */
+    --bs-body-bg:          #111318;
+    --bs-body-color:       #e2e8f0;
+    --bs-secondary-color:  #94a3b8;
+    --bs-border-color:     #2a2d35;
+    --bs-warning:          #e8a020;
+    --bs-warning-rgb:      232, 160, 32;
+    --bs-link-color:       #e8a020;
+    --bs-link-color-rgb:   232, 160, 32;
+    --bs-link-hover-color: #c4861a;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+body {
+    background-color: var(--qf-bg);
+    color: var(--qf-text);
+}
+
+a {
+    color: var(--qf-amber);
+    text-decoration: none;
+}
+a:hover { color: var(--qf-amber-dark); }
+
+/* ── Text utilities ────────────────────────────────────────────── */
+.text-muted      { color: var(--qf-muted)   !important; }
+.text-primary    { color: var(--qf-amber)   !important; }
+.text-warning    { color: var(--qf-amber)   !important; }
+.text-secondary  { color: var(--qf-muted)   !important; }
+.text-info       { color: #38bdf8           !important; }
+.text-success    { color: #4ade80           !important; }
+.text-danger     { color: #f87171           !important; }
+
+/* ── Navbar ────────────────────────────────────────────────────── */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.navbar-custom {
+    background-color: var(--qf-navbar-bg) !important;
+    border-bottom: 1px solid var(--qf-border);
+}
+
+.navbar-custom .navbar-brand { color: var(--qf-amber) !important; }
+
+.navbar-custom .nav-link {
+    color: #c9d1d9 !important;
+    transition: color .2s;
+}
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active { color: var(--qf-amber) !important; }
+
+.navbar-custom .dropdown-menu {
+    background-color: var(--qf-surface);
+    border-color: var(--qf-border);
+}
+.navbar-custom .dropdown-item {
+    color: var(--qf-text);
+    transition: background-color .15s;
+}
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+    background-color: var(--qf-surface-2);
+    color: var(--qf-amber);
+}
+.navbar-custom .dropdown-item.text-danger         { color: #f87171 !important; }
+.navbar-custom .dropdown-item.text-danger:hover   { background-color: #2a1010; color: #fca5a5 !important; }
+
+/* ── Dropdowns (global) ────────────────────────────────────────── */
+.dropdown-menu {
+    background-color: var(--qf-surface);
+    border-color: var(--qf-border);
+}
+.dropdown-item                    { color: var(--qf-text); }
+.dropdown-item:hover,
+.dropdown-item:focus              { background-color: var(--qf-surface-2); color: var(--qf-amber); }
+.dropdown-item.text-success       { color: #4ade80           !important; }
+.dropdown-item.text-warning       { color: #fde68a           !important; }
+.dropdown-item.text-secondary     { color: var(--qf-muted)   !important; }
+.dropdown-item.text-danger        { color: #f87171           !important; }
+
+/* ── Cards ─────────────────────────────────────────────────────── */
+.card {
+    background-color: var(--qf-surface);
+    border-color: var(--qf-border);
+    color: var(--qf-text);
+    transition: border-color .2s;
+}
+.card-header {
+    background-color: var(--qf-deep);
+    border-bottom-color: var(--qf-border);
+    color: var(--qf-text);
+}
+.card-footer {
+    background-color: var(--qf-deep);
+    border-top-color: var(--qf-border);
+    color: var(--qf-muted);
+}
+.card-footer.bg-transparent {
+    background-color: transparent !important;
+    border-top-color: var(--qf-border);
+}
+
+/* Card header — login page (bg-primary) */
+.card-header.bg-primary {
+    background: linear-gradient(135deg, #1c1600 0%, var(--qf-deep) 100%) !important;
+    border-bottom: 2px solid var(--qf-amber) !important;
+    color: var(--qf-amber) !important;
+}
+.card-header.bg-primary small { color: var(--qf-muted); }
+
+/* Card header — registro page (bg-success) */
+.card-header.bg-success {
+    background: linear-gradient(135deg, #0a1e12 0%, var(--qf-deep) 100%) !important;
+    border-bottom: 2px solid #22c55e !important;
+    color: #22c55e !important;
+}
+.card-header.bg-success small { color: var(--qf-muted); }
+
+/* Match info card — pronosticos */
+.bg-match-dark {
+    background: linear-gradient(135deg, var(--qf-surface) 0%, var(--qf-surface-2) 100%) !important;
+    border: 1px solid var(--qf-amber) !important;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────── */
+.table {
+    --bs-table-bg:           var(--qf-surface);
+    --bs-table-color:        var(--qf-text);
+    --bs-table-border-color: var(--qf-border);
+    --bs-table-hover-bg:     var(--qf-surface-2);
+    --bs-table-hover-color:  var(--qf-text);
+}
+.table th {
+    background-color: var(--qf-deep) !important;
+    color: var(--qf-amber);
+    border-color: var(--qf-border);
+    font-size: .82rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.table td { border-color: var(--qf-border); }
+.table-hover > tbody > tr:hover > * {
+    background-color: var(--qf-surface-2);
+    color: var(--qf-text);
+}
+
+/* ── Forms ─────────────────────────────────────────────────────── */
+.form-control,
+.form-select {
+    background-color: var(--qf-deep);
+    border-color: var(--qf-border);
+    color: var(--qf-text);
+    transition: border-color .2s, box-shadow .2s;
+}
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--qf-deep);
+    border-color: var(--qf-amber);
+    color: var(--qf-text);
+    box-shadow: 0 0 0 .25rem rgba(232,160,32,.2);
+}
+.form-control::placeholder { color: var(--qf-muted); opacity: .7; }
+.form-label                { color: var(--qf-text); }
+.form-text                 { color: var(--qf-muted); }
+
+/* ── Buttons — Primary (amber) ─────────────────────────────────── */
+.btn-primary {
+    background-color: var(--qf-amber)      !important;
+    border-color:     var(--qf-amber)      !important;
+    color:            #111318              !important;
+    font-weight: 600;
+    transition: background-color .2s, border-color .2s;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:first-child:active,
+:not(.btn-check) + .btn-primary:active {
+    background-color: var(--qf-amber-dark) !important;
+    border-color:     var(--qf-amber-dark) !important;
+    color:            #111318              !important;
+}
+
+.btn-outline-primary {
+    color:        var(--qf-amber) !important;
+    border-color: var(--qf-amber) !important;
+    background-color: transparent !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--qf-amber) !important;
+    color:            #111318        !important;
+}
+
+/* ── Buttons — Warning (amber accent) ─────────────────────────── */
+.btn-warning {
+    background-color: var(--qf-amber)      !important;
+    border-color:     var(--qf-amber)      !important;
+    color:            #111318              !important;
+    font-weight: 600;
+}
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: var(--qf-amber-dark) !important;
+    border-color:     var(--qf-amber-dark) !important;
+    color:            #111318              !important;
+}
+
+.btn-outline-warning {
+    color:        var(--qf-amber) !important;
+    border-color: var(--qf-amber) !important;
+    background-color: transparent !important;
+}
+.btn-outline-warning:hover {
+    background-color: var(--qf-amber) !important;
+    color:            #111318        !important;
+}
+
+/* ── Buttons — Success ─────────────────────────────────────────── */
+.btn-success {
+    background-color: #166534 !important;
+    border-color:     #166534 !important;
+    color:            #dcfce7 !important;
+}
+.btn-success:hover {
+    background-color: #15803d !important;
+    border-color:     #15803d !important;
+}
+.btn-outline-success {
+    color:        #4ade80 !important;
+    border-color: #166534 !important;
+    background-color: transparent !important;
+}
+.btn-outline-success:hover {
+    background-color: #166534 !important;
+    color:            #dcfce7 !important;
+}
+
+/* ── Buttons — Info ────────────────────────────────────────────── */
+.btn-info {
+    background-color: #0e7490 !important;
+    border-color:     #0e7490 !important;
+    color:            #e0f2fe !important;
+}
+.btn-info:hover {
+    background-color: #0c6278 !important;
+    border-color:     #0c6278 !important;
+}
+.btn-outline-info {
+    color:        #38bdf8 !important;
+    border-color: #0e7490 !important;
+    background-color: transparent !important;
+}
+.btn-outline-info:hover {
+    background-color: #0e7490 !important;
+    color:            #e0f2fe !important;
+}
+
+/* ── Buttons — Secondary ───────────────────────────────────────── */
+.btn-outline-secondary {
+    color:            var(--qf-muted)     !important;
+    border-color:     var(--qf-border)    !important;
+    background-color: transparent         !important;
+}
+.btn-outline-secondary:hover {
+    background-color: var(--qf-surface-2) !important;
+    border-color:     var(--qf-muted)     !important;
+    color:            var(--qf-text)      !important;
+}
+
+/* ── Buttons — Danger ──────────────────────────────────────────── */
+.btn-outline-danger {
+    color:            #f87171    !important;
+    border-color:     #7f1d1d   !important;
+    background-color: transparent !important;
+}
+.btn-outline-danger:hover {
+    background-color: #7f1d1d  !important;
+    border-color:     #7f1d1d  !important;
+    color:            #fecaca  !important;
+}
+
+/* Close button (visible on dark backgrounds) */
+.btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+
+/* ── Badges ─────────────────────────────────────────────────────── */
+.badge-ABIERTA {
+    background-color: #14532d;
+    color:            #86efac;
+    border: 1px solid #166534;
+}
+.badge-CERRADA {
+    background-color: #78350f;
+    color:            #fde68a;
+    border: 1px solid #92400e;
+}
+.badge-FINALIZADA {
+    background-color: #1f2937;
+    color:            #9ca3af;
+    border: 1px solid #374151;
+}
+.badge-PENDIENTE {
+    background-color: #0c4a6e;
+    color:            #7dd3fc;
+    border: 1px solid #075985;
+}
+.badge-FINALIZADO {
+    background-color: #1f2937;
+    color:            #9ca3af;
+    border: 1px solid #374151;
+}
+
+.badge.bg-primary {
+    background-color: var(--qf-amber) !important;
+    color:            #111318         !important;
+}
+
+/* ── Alerts ─────────────────────────────────────────────────────── */
+.alert-success {
+    background-color: #052e16;
+    border-color:     #166534;
+    color:            #bbf7d0;
+}
+.alert-danger {
+    background-color: #1c0a0a;
+    border-color:     #7f1d1d;
+    color:            #fecaca;
+}
+.alert-info {
+    background-color: #082f49;
+    border-color:     #075985;
+    color:            #bae6fd;
+}
+.alert-light {
+    background-color: var(--qf-surface);
+    border-color:     var(--qf-border);
+    color:            var(--qf-text);
+}
+.alert-warning {
+    background-color: #1c1200;
+    border-color:     var(--qf-amber-dark);
+    color:            #fde68a;
+}
+
+/* ── Ranking ────────────────────────────────────────────────────── */
+.ranking-pos {
+    font-weight: 700;
+    font-size:   1.1rem;
+}
+
+/* bg-warning opacity card on ranking page */
+.bg-warning.bg-opacity-10 {
+    background-color: rgba(232, 160, 32, .07) !important;
+}
+.border-warning {
+    border-color: var(--qf-amber) !important;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar             { width: 8px; height: 8px; }
+::-webkit-scrollbar-track       { background: var(--qf-deep); }
+::-webkit-scrollbar-thumb       { background: var(--qf-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--qf-muted); }

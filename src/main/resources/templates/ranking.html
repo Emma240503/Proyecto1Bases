@@ -20,7 +20,7 @@
             <i class="bi bi-arrow-left"></i>
         </a>
         <h3 class="fw-bold mb-0">
-            <i class="bi bi-trophy-fill text-warning me-2"></i>Ranking
+            <img th:src="@{/images/herediano.png}" width="80" height="80" style="object-fit:contain;vertical-align:middle;" alt="Herediano" class="me-2"/>Ranking
         </h3>
     </div>
 
@@ -52,8 +52,8 @@
                         <tr th:each="fila, stat : ${ranking}">
                             <!-- Posición con íconos para top 3 -->
                             <td class="text-center ranking-pos">
-                                <span th:if="${stat.index == 0}" class="text-warning fs-4">
-                                    <i class="bi bi-trophy-fill"></i>
+                                <span th:if="${stat.index == 0}">
+                                    <img th:src="@{/images/herediano.png}" width="40" height="40" style="object-fit:contain" alt="1°"/>
                                 </span>
                                 <span th:if="${stat.index == 1}" class="text-secondary fs-5">
                                     <i class="bi bi-award-fill"></i>
