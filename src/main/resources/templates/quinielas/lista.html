@@ -3,6 +3,28 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/layout :: head('Quinielas')}"></head>
+<style>
+    body {
+        background-image: url('https://wallpaperaccess.com/full/562943.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 0;
+    }
+    nav, .container {
+        position: relative;
+        z-index: 1;
+    }
+    h3, .text-muted {
+        color: #fff !important;
+    }
+</style>
 <body>
 
 <nav th:replace="~{fragments/layout :: navbar}"></nav>

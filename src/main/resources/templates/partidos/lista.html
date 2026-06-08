@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('Partidos')}"></head>
+<style>
+    body {
+        background-image: url('https://www.webnode.com/es/blog/files/2012/07/Football.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 0;
+    }
+    nav, .container {
+        position: relative;
+        z-index: 1;
+    }
+    h3, .text-muted {
+        color: #fff !important;
+    }
+</style>
 <body>
 
 <nav th:replace="~{fragments/layout :: navbar}"></nav>

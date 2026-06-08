@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('Iniciar Sesión')}"></head>
+<style>
+    body {
+        background-image: url('https://nuevaya.com.ni/wp-content/uploads/2024/02/clubs-de-futbol-de-costa-rica.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 0;
+    }
+    .card {
+        position: relative;
+        z-index: 1;
+    }
+</style>
 <body class="d-flex align-items-center justify-content-center min-vh-100">
 
 <div class="card shadow" style="width: 100%; max-width: 420px;">
     <div class="card-header bg-primary text-white text-center py-3">
         <h4 class="mb-0">
-            <i class="bi bi-trophy-fill me-2"></i>QuinielaFútbol
+            <img src="https://media.giphy.com/media/KFPrlCarpIKgj5suYj/giphy.gif"
+                 height="32" width="32" style="object-fit:contain;" alt=""/>QuinielaFútbol
         </h4>
         <small>Inicia sesión para continuar</small>
     </div>
